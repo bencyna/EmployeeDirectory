@@ -7,7 +7,6 @@ import SearchResults from "./searchResults";
 class Search extends Component {
   state = {
     search: "",
-    employees: [],
     results: [],
     error: "",
   };
@@ -26,13 +25,33 @@ class Search extends Component {
   };
 
   handleSortFunction = (event) => {
-    event.preventDeafult();
+    let orderResults = [];
+    for (let i = 0; i < this.state.results.length; i++) {
+      orderResults.push(this.state.results[i].name.first);
+    }
+
+    const test_with_index = [];
+    for (let i in orderResults) {
+      test_with_index.push([orderResults[i], i]);
+    }
+    test_with_index.sort(function (left, right) {
+      return left[0] < right[0] ? -1 : 1;
+    });
+    let indexes = [];
+    orderResults = [];
+    for (let j in test_with_index) {
+      orderResults.push(test_with_index[j][0]);
+      indexes.push(test_with_index[j][1]);
+    }
+
+    const output = indexes.map((i) => this.state.results[i]);
+
+    this.setState({ results: output });
   };
 
   render() {
     return (
       <div>
-        <p>Searching for {this.state.search}</p>
         <Container>
           <SearchForm
             handleInputChange={this.handleInputChange}
@@ -42,6 +61,8 @@ class Search extends Component {
           <SearchResults
             results={this.state.results}
             search={this.state.search}
+            sort={this.state.sort}
+            handleSortFunction={this.handleSortFunction}
           />
         </Container>
       </div>

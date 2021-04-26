@@ -8,7 +8,12 @@ function SearchResults(props) {
     <div className="employee container">
       <header className="headings row">
         <button className="name btn btn-light name col-sm-2"></button>
-        <button className="age btn btn-light name col-sm-2">Name</button>
+        <button
+          onClick={props.handleSortFunction}
+          className="age btn btn-light name col-sm-2"
+        >
+          Name
+        </button>
         <button className="gender btn btn-light name col-sm-2">Age</button>
         <button className="email btn btn-light name col-sm-3">Email</button>
         <button className="location btn btn-light name col-sm-3">
