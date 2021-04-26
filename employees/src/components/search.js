@@ -9,12 +9,12 @@ class Search extends Component {
     search: "",
     results: [],
     error: "",
+    sort: "desc",
   };
 
   componentDidMount() {
     API.getEmployees()
       .then((res) => {
-        console.log(res.data.results);
         this.setState({ results: res.data.results });
       })
       .catch((err) => console.log(err));
@@ -34,9 +34,17 @@ class Search extends Component {
     for (let i in orderResults) {
       test_with_index.push([orderResults[i], i]);
     }
-    test_with_index.sort(function (left, right) {
-      return left[0] < right[0] ? -1 : 1;
-    });
+    if (this.state.sort == "desc") {
+      this.setState({ sort: "asc" });
+      test_with_index.sort(function (left, right) {
+        return left[0] < right[0] ? -1 : 1;
+      });
+    } else {
+      this.setState({ sort: "desc" });
+      test_with_index.reverse(function (left, right) {
+        return left[0] < right[0] ? -1 : 1;
+      });
+    }
     let indexes = [];
     orderResults = [];
     for (let j in test_with_index) {
