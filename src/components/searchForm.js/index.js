@@ -4,7 +4,8 @@ import "./style.css";
 // Using the datalist element we can create autofill suggestions based on the props.names array
 function SearchForm(props) {
   const searchingFor = props.results.filter(
-    (employee) => employee.name.first === props.search
+    (employee) =>
+      employee.name.first.toLowerCase() === props.search.toLowerCase()
   );
   return (
     <form className="search">
