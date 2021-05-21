@@ -34,7 +34,7 @@ The above image is an example of the react code used in this project. The below 
 
 ## Tests
 
-got to https://bencyna.github.io/employeeDirectory
+got to https://bencyna.github.io/EmployeeDirectory
 
 ## Questions
 
